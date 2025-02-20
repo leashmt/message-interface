@@ -1,9 +1,15 @@
 package com.example.messageInterface.Model;
 
 import jakarta.persistence.*;
+import lombok.*;
+
 import java.time.LocalDateTime;
 
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Message {
 
     @Id
@@ -14,20 +20,14 @@ public class Message {
 
     private String author;
 
-    private LocalDateTime date;
-
-    public Message() {
-        this.date = LocalDateTime.now();
-    }
-
-    public Message(String content, String author) {
-        this.content = content;
-        this.author = author;
-        this.date = LocalDateTime.now();
-    }
+    private LocalDateTime createdAt;
 
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getContent() {
@@ -46,11 +46,11 @@ public class Message {
         this.author = author;
     }
 
-    public LocalDateTime getDate() {
-        return date;
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
     }
 
-    public void setDate(LocalDateTime date) {
-        this.date = date;
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
     }
 }
