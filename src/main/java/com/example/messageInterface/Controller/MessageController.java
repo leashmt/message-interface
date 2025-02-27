@@ -2,6 +2,7 @@ package com.example.messageInterface.Controller;
 
 import com.example.messageInterface.Model.Message;
 import com.example.messageInterface.Model.Quote;
+import com.example.messageInterface.Repository.MessageRepository;
 import com.example.messageInterface.Service.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -13,16 +14,21 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Controller
 public class MessageController {
     @Autowired
     private final MessageService messageService;
     private final RestTemplate restTemplate;
+    private final MessageRepository messageRepository;
 
     @Autowired
-    public MessageController(MessageService messageService, RestTemplate restTemplate) {
+    public MessageController(MessageService messageService, RestTemplate restTemplate, MessageRepository messageRepository) {
         this.messageService = messageService;
         this.restTemplate = restTemplate;
+        this.messageRepository = messageRepository;
     }
 
     @PostMapping("/send")
@@ -59,5 +65,25 @@ public class MessageController {
             model.addAttribute("error", "Impossible de récupérer une citation.");
         }
         return "conversation";
+    }
+
+    @GetMapping("/sorted-by-author-2")
+    public List<Message> getMessagesSortedByAuthor2() {
+        return messageRepository.findAll()
+                .stream()
+                .sorted((m1, m2) -> m1.getAuthor().compareToIgnoreCase(m2.getAuthor()))
+                .collect(Collectors.toList());
+    }
+
+    @GetMapping("/sorted-by-author")
+    public List<Message> getMessagesSortedByAuthor() {
+        return messageRepository.findAllByOrderByAuthorAsc();
+    }
+
+    @GetMapping("/messages/view")
+    public String showMessagesSortedByAuthor(Model model) {
+        List<Message> messages = messageRepository.findAllByOrderByAuthorAsc();
+        model.addAttribute("messages", messages);
+        return "messages";
     }
 }

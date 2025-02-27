@@ -5,10 +5,82 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Conversation</title>
     <style>
-        body { font-family: Arial, sans-serif; }
-        .chat-container { width: 50%; margin: auto; padding: 20px; border: 1px solid #ccc; border-radius: 5px; }
-        .message { background: #f1f1f1; padding: 10px; border-radius: 10px; margin: 5px 0; }
-        .response { background: #d1e7fd; padding: 10px; border-radius: 10px; margin: 5px 0; text-align: right; }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .chat-container {
+            width: 50%;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #4CAF50;
+            text-align: center;
+        }
+
+        .message, .response {
+            padding: 10px;
+            border-radius: 10px;
+            margin: 5px 0;
+            font-size: 1rem;
+        }
+
+        .message {
+            background-color: #f1f1f1;
+        }
+
+        .response {
+            background-color: #d1e7fd;
+            text-align: right;
+        }
+
+        .response:last-child {
+            background-color: #ffd8d8; /* for error messages */
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            margin-top: 20px;
+        }
+
+        label {
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input[type="text"] {
+            padding: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
     </style>
 </head>
 <body>
