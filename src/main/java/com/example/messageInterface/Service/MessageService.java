@@ -13,11 +13,16 @@ public class MessageService {
         this.messageRepository = messageRepository;
     }
 
-    public Message saveMessage(String content, String author) {
+    public Message saveMessage(Message message) {
+        message.setDate(LocalDateTime.now());
+        return messageRepository.save(message);
+    }
+
+    public Message createMessage(String content, String author) {
         Message message = new Message();
         message.setContent(content);
         message.setAuthor(author);
-        message.setCreatedAt(LocalDateTime.now());
+        message.setDate(LocalDateTime.now());
         return messageRepository.save(message);
     }
 }

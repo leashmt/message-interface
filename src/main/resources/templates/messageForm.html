@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Envoyer un message</title>
+</head>
+<body>
+<h1>Envoyer un message</h1>
+<form action="#" th:action="@{/messages}" th:object="${message}" method="post">
+    <label for="content">Message:</label>
+    <input type="text" id="content" th:field="*{content}" required>
+
+    <label for="author">Auteur:</label>
+    <input type="text" id="author" th:field="*{author}" required>
+
+    <button type="submit">Envoyer</button>
+</form>
+</body>
+</html>

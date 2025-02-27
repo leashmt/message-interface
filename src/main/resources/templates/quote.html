@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quote du jour</title>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            fetch("http://localhost:8081/quote/random")
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById("quote-text").innerText = `"${data.text}"`;
+                    document.getElementById("quote-author").innerText = `- ${data.author}`;
+                })
+                .catch(error => console.error("Erreur lors de la récupération de la quote :", error));
+        });
+    </script>
+</head>
+<body>
+<h1>Citation pour vous remotiver</h1>
+<blockquote id="quote-text">Chargement...</blockquote>
+<p id="quote-author">Chargement...</p>
+</body>
+</html>

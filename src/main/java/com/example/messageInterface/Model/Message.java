@@ -20,7 +20,7 @@ public class Message {
 
     private String author;
 
-    private LocalDateTime createdAt;
+    private LocalDateTime Date;
 
     public Long getId() {
         return id;
@@ -46,11 +46,11 @@ public class Message {
         this.author = author;
     }
 
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
+    public LocalDateTime getDate() {
+        return Date;
     }
 
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
+    public void setDate(LocalDateTime Date) {
+        this.Date = Date;
     }
 }
