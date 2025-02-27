@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversation</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .chat-container { width: 50%; margin: auto; padding: 20px; border: 1px solid #ccc; border-radius: 5px; }
+        .message { background: #f1f1f1; padding: 10px; border-radius: 10px; margin: 5px 0; }
+        .response { background: #d1e7fd; padding: 10px; border-radius: 10px; margin: 5px 0; text-align: right; }
+    </style>
+</head>
+<body>
+<div class="chat-container">
+    <h2>Conversation</h2>
+
+    <div th:if="${userMessage}">
+        <div class="message" th:text="${userMessage.content}"></div>
+    </div>
+
+    <div th:if="${quote}">
+        <div class="response" th:text="${quote.text + ' - ' + quote.author}"></div>
+    </div>
+
+    <div th:if="${error}">
+        <div class="response" th:text="${error}"></div>
+    </div>
+
+    <form action="#" th:action="@{/messages}" th:object="${message}" method="post">
+        <label for="content">Message :</label>
+        <input type="text" id="content" th:field="*{content}" required>
+
+        <label for="author">Auteur :</label>
+        <input type="text" id="author" th:field="*{author}" required>
+
+        <button type="submit">Envoyer</button>
+    </form>
+</div>
+</body>
+</html>
