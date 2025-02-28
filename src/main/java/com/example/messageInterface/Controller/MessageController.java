@@ -31,19 +31,6 @@ public class MessageController {
         this.messageRepository = messageRepository;
     }
 
-    @PostMapping("/send")
-    public String sendMessage(@RequestParam String content, @RequestParam String author, Model model) {
-        Message message = messageService.createMessage(content, author);
-        model.addAttribute("message", message);
-        return "redirect:/quote";
-    }
-
-    @GetMapping("/quote")
-    public String showQuotePage(Model model) {
-        model.addAttribute("quote", "La vie est belle !");
-        return "quote";
-    }
-
     @GetMapping("/")
     public String showForm(Model model) {
         model.addAttribute("message", new Message());
@@ -60,19 +47,11 @@ public class MessageController {
         ResponseEntity<Quote> response = restTemplate.getForEntity(apiUrl, Quote.class);
 
         if (response.getStatusCode().is2xxSuccessful() && response.getBody() != null) {
-            model.addAttribute("quote", response.getBody()); // Ajoute un objet, pas du JSON brut
+            model.addAttribute("quote", response.getBody());
         } else {
             model.addAttribute("error", "Impossible de récupérer une citation.");
         }
         return "conversation";
-    }
-
-    @GetMapping("/sorted-by-author-2")
-    public List<Message> getMessagesSortedByAuthor2() {
-        return messageRepository.findAll()
-                .stream()
-                .sorted((m1, m2) -> m1.getAuthor().compareToIgnoreCase(m2.getAuthor()))
-                .collect(Collectors.toList());
     }
 
     @GetMapping("/sorted-by-author")
